@@ -13,6 +13,12 @@ npm i eslint express
 npm i jest supertest --save-dev
 ```
 
+```
+npm install -g json-server
+
+```
+
+
 **Node run**
 
 ```
@@ -30,6 +36,14 @@ npx jest
 ```
 npx jest
 ```
+
+
+**Run Json Server**
+```
+json-server --watch db.json
+
+```
+
 
 **Construir Docker Image**
 
