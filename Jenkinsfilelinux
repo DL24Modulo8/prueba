@@ -17,7 +17,7 @@ pipeline {
                         echo '⚙️ Instalando dependencias...'
                         sh 'npm install'
                         sh 'npm run build'
-} catch (Exception e) {
+                    } catch (Exception e) {
                         error('❌ Error en la etapa de Build')
                     }
                 }
@@ -27,10 +27,22 @@ pipeline {
             steps {
                 script {
                     try {
-                        echo '🧪 Ejecutando pruebas...'
-                        sh 'npm test'
-} catch (Exception e) {
+                        echo '🧪 Ejecutando pruebas y generando cobertura...'
+                        sh 'npm test -- --coverage' // Ejecuta las pruebas con cobertura
+                    } catch (Exception e) {
                         error('❌ Error en la etapa de Test')
+                    }
+                }
+            }
+        }
+        stage('Save Coverage Report') {
+            steps {
+                script {
+                    try {
+                        echo '📝 Guardando el reporte de cobertura...'
+                        sh 'mkdir -p coverage-reports && cp -r ./coverage/* ./coverage-reports/' // Copia el reporte de cobertura
+                    } catch (Exception e) {
+                        error('❌ Error al guardar el reporte de cobertura')
                     }
                 }
             }
@@ -41,7 +53,7 @@ pipeline {
                     try {
                         echo '🚀 Desplegando aplicación...'
                         sh 'npm start &'
-} catch (Exception e) {
+                    } catch (Exception e) {
                         error('❌ Error en la etapa de Deploy')
                     }
                 }
@@ -51,6 +63,7 @@ pipeline {
     post {
         success {
             echo '✅ Pipeline completado con éxito'
+            archiveArtifacts artifacts: 'coverage-reports/**', allowEmptyArchive: true // Archiva el reporte de cobertura
         }
         failure {
             echo '❌ El pipeline ha fallado'
