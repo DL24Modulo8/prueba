@@ -35,6 +35,18 @@ pipeline {
                 }
             }
         }
+             stage('Save Coverage Report') {
+            steps {
+                script {
+                    try {
+                        echo ':nota: Guardando el reporte de cobertura...'
+                        bat 'mkdir coverage-reports && xcopy /E /I /Y coverage coverage-reports' // Copia el reporte de cobertura
+                    } catch (Exception e) {
+                        error(':x: Error al guardar el reporte de cobertura')
+                    }
+                }
+            }
+        }
         stage('Deploy') {
             steps {
                 script {
