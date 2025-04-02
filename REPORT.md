@@ -24,14 +24,14 @@ Este reporte resume los resultados de las pruebas automáticas ejecutadas, el es
 ---
 3. Automatización básica con Jenkins
 
-    :marca_de_verificación_blanca: Estado del Pipeline (Jenkins)
+    :white_check_mark: Estado del Pipeline (Jenkins)
 El pipeline configurado en Jenkins incluye las siguientes etapas:
     1. **Checkout del repositorio**
     2. **Instalación de dependencias con `npm install`**
     3. **Ejecución de pruebas con `npm test`**
     4. **Build de imagen Docker**
 
-    :flechas_en_sentido_antihorario: Pasos realizados
+    :arrows_counterclockwise: Pasos realizados
     - Crear `index.js` / `app.js`
     - Inicializar proyecto con `npm init -y`
     - Instalar dependencias: `express`, `jest`, `supertest`, `eslint`
@@ -51,7 +51,7 @@ El pipeline configurado en Jenkins incluye las siguientes etapas:
   - Causa: Jenkins no tenía Node.js configurado en el agente
   - :x: Jenkins usaba `bat` en lugar de `sh` (comando para Windows, no Linux)
 
-    [Captura ERROR ](HTTPS://RUTA_DE_lA_IMAGEN "Captura ERROR ")
+    [Captura ERROR ](https://github.com/DL24Modulo8/prueba/blob/dev/errores.md")
 ---
  5. Reporte y retroalimentación
 
